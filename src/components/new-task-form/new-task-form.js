@@ -1,34 +1,36 @@
 import React from 'react'
-import PropTypes from "prop-types"
-export default class NewTaskForm extends React.Component{
+import PropTypes from 'prop-types'
+
+export default class NewTaskForm extends React.Component {
   state = {
-    label: ""
+    label: '',
   }
-  onTaskChange = (event)=>{
-    this.setState(()=>{
-      return{
-        label: event.target.value
-      }
-    })
+
+  onTaskChange = (event) => {
+    this.setState(() => ({
+      label: event.target.value,
+    }))
   }
-  onEnterValue = (event)=>{
-    if(event.key === "Enter"){
+
+  onEnterValue = (event) => {
+    if (event.key === 'Enter') {
       this.props.onAddItem(this.state.label)
       this.setState({
-        label: ""
+        label: '',
       })
     }
   }
-  render(){
-    return(
-      <header className='header'>
+
+  render() {
+    return (
+      <header className="header">
         <h1>todos</h1>
-        <input className="new-todo"
-               placeholder="What needs to be done?"
-               autoFocus={true}
-               onChange={this.onTaskChange}
-               onKeyDown={this.onEnterValue}
-               value={this.state.label}
+        <input
+          className="new-todo"
+          placeholder="What needs to be done?"
+          onChange={this.onTaskChange}
+          onKeyDown={this.onEnterValue}
+          value={this.state.label}
         />
       </header>
     )
@@ -37,5 +39,4 @@ export default class NewTaskForm extends React.Component{
 
 NewTaskForm.propTypes = {
   onAddItem: PropTypes.func.isRequired,
-};
-
+}
