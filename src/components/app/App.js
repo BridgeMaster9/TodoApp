@@ -10,16 +10,17 @@ export default class App extends React.Component {
 
   state = {
     todoData: [],
-    filterTask: 'All',
+    filterTask: 'all',
   }
 
-  creatTodoItem(label) {
+  creatTodoItem(label, timer) {
     return {
       label,
       id: this.maxId++,
       completed: false,
       editing: false,
       date: new Date(),
+      timer,
     }
   }
 
@@ -40,10 +41,10 @@ export default class App extends React.Component {
     })
   }
 
-  addItem = (text) => {
+  addItem = (text, min, sec) => {
     this.setState(({ todoData }) => {
-      const newItem = this.creatTodoItem(text)
-
+      const newTimer = `${min}:${sec}`
+      const newItem = this.creatTodoItem(text, newTimer)
       const newArr = [...todoData, newItem]
       return {
         todoData: newArr,
@@ -66,17 +67,6 @@ export default class App extends React.Component {
     return [...arr.slice(0, idx), newItem, ...arr.slice(idx + 1)]
   }
 
-  filterTasks(items, filterTask) {
-    switch (filterTask) {
-      case 'Active':
-        return items.filter((item) => !item.completed)
-      case 'Completed':
-        return items.filter((item) => item.completed)
-      default:
-        return items
-    }
-  }
-
   onFilterChange = (filter) => {
     this.setState({ filterTask: filter })
   }
@@ -92,8 +82,7 @@ export default class App extends React.Component {
 
   render() {
     const { todoData, filterTask } = this.state
-    const visibleItems = this.filterTasks(todoData, filterTask)
-
+    const visibleItems = todoData
     const completedCount = todoData.filter((el) => el.completed).length
     const activeCount = todoData.length - completedCount
 
@@ -103,6 +92,7 @@ export default class App extends React.Component {
         <section className="main">
           <TaskList
             todos={visibleItems}
+            filterTask={filterTask}
             onDeleted={this.deleteItem}
             onToggleCompleted={this.toggleCompleted}
             onToggleEditing={this.toggleEditing}

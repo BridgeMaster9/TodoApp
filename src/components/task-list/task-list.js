@@ -6,7 +6,7 @@ import PropTypes from 'prop-types'
 // eslint-disable-next-line react/prefer-stateless-function
 export default class TaskList extends React.Component {
   render() {
-    const { todos, onDeleted, onToggleCompleted, onToggleEditing, onChangeLabel } = this.props
+    const { todos, onDeleted, onToggleCompleted, onToggleEditing, onChangeLabel, filterTask } = this.props
     const elements = todos.map((item) => (
       <Task
         key={item.id}
@@ -15,6 +15,7 @@ export default class TaskList extends React.Component {
         onToggleCompleted={() => onToggleCompleted(item.id)}
         onToggleEditing={() => onToggleEditing(item.id)}
         onChangeLabel={onChangeLabel}
+        filterTask={filterTask}
       />
     ))
 

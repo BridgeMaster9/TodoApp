@@ -3,9 +3,9 @@ import PropTypes from 'prop-types'
 
 export default class TasksFilter extends React.Component {
   buttons = [
-    { name: 'All', selected: false },
-    { name: 'Active', selected: false },
-    { name: 'Completed', selected: false },
+    { name: 'all', selected: false },
+    { name: 'active', selected: false },
+    { name: 'completed', selected: false },
   ]
 
   render() {
