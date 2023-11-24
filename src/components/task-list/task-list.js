@@ -3,25 +3,23 @@ import Task from '../task'
 import React from 'react'
 import PropTypes from 'prop-types'
 
-// eslint-disable-next-line react/prefer-stateless-function
-export default class TaskList extends React.Component {
-  render() {
-    const { todos, onDeleted, onToggleCompleted, onToggleEditing, onChangeLabel, filterTask } = this.props
-    const elements = todos.map((item) => (
-      <Task
-        key={item.id}
-        todo={item}
-        onDeleted={() => onDeleted(item.id)}
-        onToggleCompleted={() => onToggleCompleted(item.id)}
-        onToggleEditing={() => onToggleEditing(item.id)}
-        onChangeLabel={onChangeLabel}
-        filterTask={filterTask}
-      />
-    ))
-
-    return <ul className="todo-list">{elements}</ul>
-  }
+const TaskList = function (props) {
+  const { todos, onDeleted, onToggleCompleted, onToggleEditing, onChangeLabel, filterTask } = props
+  const elements = todos.map((item) => (
+    <Task
+      key={item.id}
+      todo={item}
+      onDeleted={() => onDeleted(item.id)}
+      onToggleCompleted={() => onToggleCompleted(item.id)}
+      onToggleEditing={() => onToggleEditing(item.id)}
+      onChangeLabel={onChangeLabel}
+      filterTask={filterTask}
+    />
+  ))
+  return <ul className="todo-list">{elements}</ul>
 }
+
+export default TaskList
 
 TaskList.propTypes = {
   todos: PropTypes.arrayOf(PropTypes.object),

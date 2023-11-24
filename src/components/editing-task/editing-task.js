@@ -1,34 +1,30 @@
-import React from 'react'
+import React, { useState } from 'react'
 
-export default class EditingTask extends React.Component {
-  state = { label: '' }
+const EditingTask = function (props) {
+  const [label, setLabel] = useState('')
 
-  onTaskChange = (event) => {
-    this.setState(() => ({
-      label: event.target.value,
-    }))
+  const onTaskChange = (event) => {
+    setLabel(event.target.value)
   }
 
-  onEnterValue = (event) => {
+  const onEnterValue = (event) => {
     if (event.key === 'Enter') {
-      this.props.onChangeLabel(this.props.id, this.state.label)
+      props.onChangeLabel(props.id, label)
     }
   }
 
-  render() {
-    const { editing, label } = this.props
-    if (editing) {
-      return (
-        <input
-          type="text"
-          className="edit"
-          onChange={this.onTaskChange}
-          onKeyDown={this.onEnterValue}
-          value={this.state.label ? this.state.label : label}
-        />
-      )
-    }
-
-    return null
+  if (props.editing) {
+    return (
+      <input
+        type="text"
+        className="edit"
+        onChange={onTaskChange}
+        onKeyDown={onEnterValue}
+        value={label || props.label}
+      />
+    )
   }
+  return null
 }
+
+export default EditingTask

@@ -29,7 +29,10 @@
     "linebreak-style": [0, "unix"],
     "quotes": ["error", "single"],
     "class-methods-use-this": "off",
+    "func-names": "off",
     "no-plusplus": "off",
+    "react/jsx-no-bind": "off",
+    "consistent-return": "off",
     "jsx-a11y/no-autofocus": "off",
     "import/no-unresolved": [2, { "caseSensitive": false }],
     "import/order": [
